@@ -1,12 +1,12 @@
 <?php
-require_once './app/objects/Song.php';
-class Songs_model
+require_once './objects/Song.php';
+require_once './api/models/table.model.php';
+class Songs_model extends Table_model
 {
-    private $db;
-
     public function __construct()
     {
-        $this->db = new PDO('mysql:host=' . MYSQL_HOST .';dbname=' . MYSQL_DBASE .';charset=utf8', MYSQL_USER, MYSQL_PASS);
+        parent::__construct();
+        $this->table_name = 'Songs';
     }
 
     public function getSongs()
