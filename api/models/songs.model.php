@@ -16,6 +16,12 @@ class Songs_model extends Table_model
         return $query->fetchAll(PDO::FETCH_CLASS, 'Song');
     }
 
+    public function getSongById($id)
+    {
+        $query = $this->db->prepare('SELECT * FROM Songs WHERE id= ?');
+        $query->execute([$id]);
+        return $query->fetchAll(PDO::FETCH_CLASS, 'Song')[0];
+    }
     public function getSongsByAlbum($id)
     {
         $query = $this->db->prepare('SELECT * FROM Songs WHERE album_id = ?');
@@ -30,12 +36,6 @@ class Songs_model extends Table_model
         return $query->fetchAll(PDO::FETCH_CLASS, 'Song');
     }
 
-    public function getSongById($id)
-    {
-        $query = $this->db->prepare('SELECT * FROM Songs WHERE id= ?');
-        $query->execute([$id]);
-        return $query->fetchAll(PDO::FETCH_CLASS, 'Song')[0];
-    }
 
     public function addSong($title, $release_date, $album, $lyric)
     {
