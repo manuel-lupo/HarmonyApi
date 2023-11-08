@@ -21,8 +21,8 @@ $router->addRoute("albums/:ID" , "PUT" , "AlbumApiController", "updateAlbum");
 
 $router->addRoute('songs' , 'GET', 'songApiController', 'getSongs');
 $router->addRoute('songs/:ID', 'GET', 'songApiController', 'getSong');
-$router->addRoute('songs', 'POST', 'songApiController', 'addSong');
 $router->addRoute('songs/:ID', 'DELETE', 'songApiController', 'deleteSong');
+$router->addRoute('songs', 'POST', 'songApiController', 'addSong');
 $router->addRoute('songs/:ID', 'POST', 'songApiController', 'updateSong');
 
 //run

@@ -21,8 +21,36 @@ class songApiController extends TableApiController {
         return $this->view->response($song, 200);
     }
 
-    function addSong(){
+    public function deleteSong($params = []) {
+        $song_id = $params[':ID'];
+        if(empty($song_id)){
+            $this->view->response('no se ingresó un id', 400);
+        }
+        $song = $this->songsModel->getSongById($song_id);
+        if ($song) {
+            if($this->songsModel->deleteSong($song_id);){
+                $this->view->response("la canción con id= $song_id se eliminó con éxito", 200);
+            }else
+            $this->view->response('la canción no se pudo eliminar', 500);
+        }
+        else 
+            $this->view->response("la canción con id= $song_id no existe", 404);
+    }
+
+    public function addSong($params = []) {   
+         $body = $this->getData();
         
+         $song = new song();
+         $song->setValues($data->title, $data->rel_date, $data->album_id, $data->lyrics);
+
+         $song_id = $this->songsModel->addSong($song);
+
+         $added_song = $this->songsModel->getSongById($song_id);
+
+         if($added_song){
+            $this->view->response($added_song, 201);
+         }else
+         $this->view->response("La canción no fué creada", 500);
     }
   
 }

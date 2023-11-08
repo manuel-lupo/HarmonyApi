@@ -12,7 +12,7 @@ class Song{
 
     public function setValues($id, $title, $rel_date, $album_id, $lyrics){
         $this->id = $id;
-        $this->$title = $title;
+        $this->title = $title;
         $this->rel_date = $rel_date;
         $this->album_id = $album_id;
         $this->lyrics = $lyrics;

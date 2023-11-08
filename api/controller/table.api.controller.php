@@ -1,6 +1,6 @@
 <?php
 
-class TableApiController{
+abstract class TableApiController{
 
     protected $model;
     protected $view;
