@@ -12,7 +12,7 @@ define("BASE_URL", 'http://'.$_SERVER["SERVER_NAME"].':'.$_SERVER["SERVER_PORT"]
 $router = new Router();
 
 // rutas
-
+$router->addRoute("auth", "POST", "AuthApiController", "login");
 
 $router->addRoute("albums" , "GET" , "AlbumApiController", "getAlbums");
 $router->addRoute("albums/:ID" , "GET" , "AlbumApiController", "getAlbum");
@@ -20,8 +20,14 @@ $router->addRoute("albums" , "POST" , "AlbumApiController", "addAlbum");
 $router->addRoute("albums/:ID" , "DELETE" , "AlbumApiController", "deleteAlbum");
 $router->addRoute("albums/:ID" , "PUT" , "AlbumApiController", "updateAlbum");
 
+$router->addRoute("songs", "GET", "songsApiController", "getSongs");
+$router->addRoute("songs/:ID", "GET", "songsApiController", "getSong");
+$router->addRoute("songs/:ID", "DELETE", "songsApiController", "deleteSong");
+$router->addRoute("songs", "POST", "songsApiController", "addSong");
+$router->addRoute("songs/:ID", "PUT", "songsApiController", "updateSong");
+
 //run
-$router->route($_GET['resource'], $_SERVER['REQUEST_METHOD']); 
+$router->route($_GET['resource'], $_SERVER['REQUEST_METHOD']);
 } catch (\Throwable $th) {
     die($th);
 }
