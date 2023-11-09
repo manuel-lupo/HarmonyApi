@@ -1,6 +1,6 @@
 <?php
 require_once './api/config.php';
-abstract class Table_model{
+class Table_model{
     protected $db;
     protected $table_name; //Definida por el hijo
 

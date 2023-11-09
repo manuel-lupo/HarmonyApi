@@ -1,6 +1,6 @@
 <?php
 
-abstract class TableApiController{
+class TableApiController{
 
     protected $model;
     protected $view;
@@ -17,4 +17,21 @@ abstract class TableApiController{
     {
         return json_decode($this->data);
     }
+
+    protected function verifyToken(){
+        $token = TokenHelper::getTokenFromHeaders();
+
+        if (empty($token))
+            $this->view->response([
+                "response" => "No se cuenta con un token para verificar identidad",
+                "status" => "error",
+            ], 401);
+            $verification = TokenHelper::verify($token);
+        if ($verification !== true)
+            $this->view->response([
+                "response" => $verification->getMessage(),
+                "status" => "error",
+            ], $verification->getCode());
+    }
+
 }
