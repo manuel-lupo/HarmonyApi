@@ -35,7 +35,7 @@ class AlbumApiController extends TableApiController
         $input = !empty($_GET["search_input"]) ? $_GET["search_input"] : "";
         $min_rating = !empty($_GET["min_rating"]) ? (float)$_GET["min_rating"] : 0;
         $sorted_by = (!empty($_GET['sort_by']) && $this->model->columnExists($_GET['sort_by'])) ? $_GET['sort_by'] : "rel_date";
-        $order = (!empty($_GET['order']) && $_GET['order'] == 1) ? 1 : 0;
+        $order = (!empty($_GET['order']) && $_GET['order'] == 1) ? "DESC" : "ASC";
 
         $page = !empty($_GET['page']) ? (int)$_GET['page'] : 1;
         $per_page = !empty($_GET['per_page']) ? (int)$_GET['per_page'] : 10;
