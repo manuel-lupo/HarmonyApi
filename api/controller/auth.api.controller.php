@@ -18,16 +18,25 @@ class AuthApiController extends TableApiController{
     public function login($params =[]){
         $data = $this->getData();
         if(empty($data->password) or empty($data->name)){
-            $this->view->response("No se ha envida nada en los campos 'name' o 'password'",400);
+            $this->view->response([
+                "data" => "No se ha envida nada en los campos 'name' o 'password'",
+                "status"=> "error",
+            ],400);
         }
 
         $user = $this->model->getByUser($data->name);
 
         if(empty($user))
-            $this->view->response('El nombre de usuario indicado no corresponde con uno de nuestro sistema',401);
+            $this->view->response([
+                "data"=> 'El nombre de usuario indicado no corresponde con uno de nuestro sistema',
+                'status'=> 'error'
+            ],401);
 
         if(!password_verify($data->password, $user->password))
-            $this->view->response('La contraseña ingresada es incorrecta',401);
+            $this->view->response([
+                'data'=> 'La contraseña ingresada es incorrecta',
+                'status'=> 'error'
+            ],401);
 
         $token = TokenHelper::generate($user);
         $response = [

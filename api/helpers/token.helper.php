@@ -17,6 +17,7 @@ class TokenHelper
     {
         $payload = [
             "iss" => "HarmonyHub",
+            "iat"=> strtotime("now"),
             "exp" => strtotime('now') + (3600 * 24),
             "data" => [
                 "name" => $user->name,
@@ -39,11 +40,6 @@ class TokenHelper
             // Intenta decodificar
             $decoded_token = JWT::decode($token, new Key(ENCODE_KEY, "HS256"));
         
-            // Verifica si el token ha expirado
-            if ($decoded_token->exp < strtotime('now')) {
-                // Token caducado
-                throw new Exception("El token provisto ha vencido", 401);
-            }
             if(!empty($decoded_token->nbf) and $decoded_token->nbf > strtotime('now')){
                 //Verifica si el token tiene una fecha de uso minima posterior a ahora
                 throw new Exception("El token provisto no puede ser usado hasta $decoded_token->nbf (formato de tiempo unix)",400);

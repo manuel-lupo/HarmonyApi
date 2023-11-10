@@ -50,9 +50,15 @@ class AlbumApiController extends TableApiController
                     'status' => 'success'
                 ], 200);
             else
-                $this->view->response("No se encontraron resultados con la búsqueda de: {$input}", 404);
+                $this->view->response([
+                    'data'=> "No se encontraron resultados con la búsqueda de: {$input}",
+                    "status"=> "error"
+                ], 404);
         } else {
-            $this->view->response("Ha ocurrido un error y no se puede completar la busqueda", 500);
+            $this->view->response([
+                "data"=> "Ha ocurrido un error y no se puede completar la busqueda",
+                "status"=> "error"
+            ], 500);
         }
     }
 
@@ -61,7 +67,10 @@ class AlbumApiController extends TableApiController
     {
         $id = $params[':ID'];
         if (empty($id))
-            $this->view->response('No se ha proporcionado un id', 400);
+            $this->view->response([
+                'data'=> 'No se ha proporcionado un id',
+                'status'=> 'error'
+            ], 400);
 
         $album = $this->model->getAlbumById($id);
         if ($album)

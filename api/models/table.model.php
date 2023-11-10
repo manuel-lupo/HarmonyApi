@@ -1,6 +1,6 @@
 <?php
 require_once './api/config.php';
-class Table_model{
+abstract class Table_model{
     protected $db;
     protected $table_name; //Definida por el hijo
 
@@ -12,9 +12,9 @@ class Table_model{
     public function columnExists($column_name)
     {
         $name = $this->getTableName();
-        $stmt = $this->db->prepare("DESCRIBE $name");
-        $stmt->execute();
-        $columns = $stmt->fetchAll(PDO::FETCH_COLUMN);
+        $query = $this->db->prepare("DESCRIBE $name");
+        $query->execute();
+        $columns = $query->fetchAll(PDO::FETCH_COLUMN);
 
         return in_array($column_name, $columns);
     }
