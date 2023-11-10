@@ -1,7 +1,7 @@
 <?php
 require_once './objects/Song.php';
 require_once './api/models/table.model.php';
-class Songs_model extends Table_model
+class songs_model extends Table_model
 {
     public function __construct()
     {
@@ -9,10 +9,13 @@ class Songs_model extends Table_model
         $this->table_name = 'Songs';
     }
 
-    public function getSongs()
+    public function getSongs($input, $query_order, $per_page, $start_index, $sorted_by)
     {
-        $query = $this->db->prepare('SELECT * FROM Songs');
-        $query->execute();
+        $limit = intval($per_page);
+        $offset = intval($start_index);
+
+        $query = $this->db->prepare("SELECT * FROM Songs WHERE title LIKE ? ORDER BY {$sorted_by} {$query_order} LIMIT {$limit} OFFSET {$offset}");
+        $query->execute(["%$input%"]);
         return $query->fetchAll(PDO::FETCH_CLASS, 'Song');
     }
 
@@ -29,14 +32,6 @@ class Songs_model extends Table_model
         $query->execute([$id]);
         return $query->fetchAll(PDO::FETCH_CLASS, 'Song');
     }
-
-    public function getFilteredSongs($string)
-    {
-        $query = $this->db->prepare('SELECT * FROM Songs WHERE title LIKE ?');
-        $query->execute(["%" . $string . "%"]);
-        return $query->fetchAll(PDO::FETCH_CLASS, 'Song');
-    }
-
 
     public function addSong($song)
     {

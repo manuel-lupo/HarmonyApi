@@ -19,7 +19,6 @@ class Album_model extends Table_model
 
         $query = $this->db->prepare("SELECT * FROM Albums WHERE rating > ? AND title LIKE ? ORDER BY {$sorted_by} {$query_order} LIMIT {$limit} OFFSET {$offset}");
 
-
         $query->execute([$rating, ("%" . $input . "%")]);
 
         return $query->fetchAll(PDO::FETCH_CLASS, 'Album');

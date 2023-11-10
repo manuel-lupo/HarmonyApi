@@ -23,13 +23,13 @@ abstract class TableApiController{
 
         if (empty($token))
             $this->view->response([
-                "response" => "No se cuenta con un token para verificar identidad",
+                "data" => "No se cuenta con un token para verificar identidad",
                 "status" => "error",
             ], 401);
             $verification = TokenHelper::verify($token);
         if ($verification !== true)
             $this->view->response([
-                "response" => $verification->getMessage(),
+                "data" => $verification->getMessage(),
                 "status" => "error",
             ], $verification->getCode());
     }

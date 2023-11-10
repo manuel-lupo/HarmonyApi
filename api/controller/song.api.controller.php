@@ -4,11 +4,10 @@ require_once './api/controller/table.api.controller.php';
 require_once './api/views/json.view.php';
 
 class songsApiController extends TableApiController {
-    private $songsModel;
 
     public function __construct(){
         parent::__construct();
-        $this->songsModel = new songs_model();
+        $this->model = new songs_model();
     }
 
     private function getSongData($song, $data){
@@ -23,12 +22,17 @@ class songsApiController extends TableApiController {
     }
 
     function getSongs($params = []) {
-        $songs = $this->songsModel->getSongs();
-        return $this->view->response($songs, 200);
+        $input = !empty($_GET["search_input"]) ? $_GET["search_input"] : "";
+        $order = (!empty($_GET['order']) && $_GET['order'] == 1) ? "DESC" : "ASC";
+        $sorted_by = (!empty($_GET['sort_by']) && $this->model->columnExists($_GET['sort_by'])) ? $_GET['sort_by'] : "album_id";
+
 
         $page = !empty($_GET['page']) ? (int)$_GET['page'] : 1;
         $per_page = !empty($_GET['per_page']) ? (int)$_GET['per_page'] : 10;
         $start_index = ($page - 1) * $per_page;
+        
+        $songs = $this->model->getSongs($input, $order, $per_page, $start_index, $sorted_by);
+        return $this->view->response($songs, 200);
     }
 
     function getSong($params = []){
@@ -41,7 +45,7 @@ class songsApiController extends TableApiController {
             ], 400);
         }
 
-        $song = $this->songsModel->getSongById($id);
+        $song = $this->model->getSongById($id);
 
         if($song){
             $this->view->response([
@@ -67,9 +71,9 @@ class songsApiController extends TableApiController {
                 'status' => 'error'
             ], 400);
         }
-        $song = $this->songsModel->getSongById($song_id);
+        $song = $this->model->getSongById($song_id);
         if ($song) {
-            if($this->songsModel->deleteSong($song_id)){
+            if($this->model->deleteSong($song_id)){
                 $this->view->response([
                     'data' => "la canción con id= $song_id se eliminó con éxito",
                     'status' => 'success'
@@ -91,12 +95,17 @@ class songsApiController extends TableApiController {
         $this->verifyToken();
 
          $data = $this->getData();
-        
+         if(empty($data->title) || empty($data->album_id)){
+            $this->view->response([
+                'data' => 'faltó introducir algun campo',
+                'status' => 'error'
+            ], 400);
+         }
          $song = new song();
          $song->setValues($data->title, $data->rel_date, $data->album_id, $data->lyrics);
 
-         $song_id = $this->songsModel->addSong($song);
-         $added_song = $this->songsModel->getSongById($song_id);
+         $song_id = $this->model->addSong($song);
+         $added_song = $this->model->getSongById($song_id);
 
          if($added_song){
             $this->view->response([
@@ -123,11 +132,18 @@ class songsApiController extends TableApiController {
         }
 
         $data = $this->getData();
-        $song = $this->songsModel->getSongById($id);
+
+        if(empty($data->title) || empty($data->album_id)){
+            $this->view->response([
+                'data' => 'faltó introducir algun campo',
+                'status' => 'error'
+            ], 400);
+            
+        $song = $this->model->getSongById($id);
 
         if($id){
             $this->getSongData($song, $data);
-            if($this->songsModel->updateSong($id, $song)){
+            if($this->model->updateSong($id, $song)){
                 $this->view->response([
                     'data' => 'la canción fue modificada con éxito',
                     'status' => 'success'
