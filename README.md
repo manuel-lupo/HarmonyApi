@@ -31,8 +31,8 @@ Aclaraciones:
 
 ### - Requerimientos
 Contar con la base de datos descripta en el siguiente archivo:
-- [Ver archivo SQL]()
-- [Ver diagrama DER]()
+- [Ver archivo SQL](./misc/db_albums.sql)
+- [Ver diagrama DER](./misc/db_diagram.png)
 
 
 ------------
@@ -165,7 +165,7 @@ Contar con la base de datos descripta en el siguiente archivo:
             Autorization: Bearer <Token generado>   
 
 - #### Paramemtros de ordenamiento:
-    Al solicitar una lista de entidades (ver [GET: /albums](#--get-albums) y [GET: /songs](--get-songs)) podemos usar los siguientes query params para controlar como se muestra la lista incluida en en altributo "data" de la respuesta:
+    Al solicitar una lista de entidades (ver [GET: /albums](#--get-albums) y [GET: /songs](#--get-songs)) podemos usar los siguientes query params para controlar como se muestra la lista incluida en en altributo "data" de la respuesta:
 
     - **?sort_by** : Este parametro recibe un string que debe corresponder con uno de los campos de la entidad solicitada. (De no corresponder se enviara la respuesta ordenada por el campo por defecto).
 
