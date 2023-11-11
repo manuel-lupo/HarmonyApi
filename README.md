@@ -185,21 +185,25 @@ Contar con la base de datos descripta en los siguientes archivos:
         BASE_URL/api/albums?per_page=3page=1sort_by=title
     */
     {
-        {
-            "id": 43,
-            "title": "Album 1",
-            [...]
+        "data" :
+        { 
+            {
+                "id": 43,
+                "title": "Album 1",
+                [...]
+            },
+            {
+                "id": 4,
+                "title": "Album 2",
+                [...]
+            },
+            {
+                "id": 34,
+                "title": "Album 3",
+                [...]
+            }
         },
-        {
-            "id": 4,
-            "title": "Album 2",
-            [...]
-        },
-        {
-            "id": 34,
-            "title": "Album 3",
-            [...]
-        }
+        "status": "success"
     }
     
     /*
@@ -207,21 +211,25 @@ Contar con la base de datos descripta en los siguientes archivos:
         BASE_URL/api/albums?per_page=3page=2sort_by=title
     */
     {
+        "data":
         {
-            "id": 3,
-            "title": "Album 4",
-            [...]
+            {
+                "id": 3,
+                "title": "Album 4",
+                [...]
+            },
+            {
+                "id": 434,
+                "title": "Album 5",
+                [...]
+            },
+            {
+                "id": 343,
+                "title": "Album 6",
+                [...]
+            }
         },
-        {
-            "id": 434,
-            "title": "Album 5",
-            [...]
-        },
-        {
-            "id": 343,
-            "title": "Album 6",
-            [...]
-        }
+        "status": "success"
     }
     ```
     -------------
