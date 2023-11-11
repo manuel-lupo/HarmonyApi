@@ -30,14 +30,14 @@ Aclaraciones:
 
 
 ### - Requerimientos
-Contar con la base de datos descripta en el siguiente archivo:
+Contar con la base de datos descripta en los siguientes archivos:
 - [Ver archivo SQL](./misc/db_albums.sql)
 - [Ver diagrama DER](./misc/db_diagram.png)
-
 
 ------------
 
 ### - Endpoints
+ - Aclaracion: Los endpoints marcados con **[TP]** (Token protected) estan protegidos por **un token de autorizacion (ver [POST: /auth](#--post-auth))**.
     
 - #### Albums
 
@@ -67,7 +67,7 @@ Contar con la base de datos descripta en el siguiente archivo:
     ##### - GET: /albums/:ID
     - Este Endpoint devuelve el album con el ID indicado dentro de "data".
 
-    ##### - POST: /albums
+    ##### - POST: /albums **[TP]**
     - Este endpoint recibe un objeto JSON en el body del HTTP Request del siguiente formato:
 
         ```json
@@ -87,10 +87,10 @@ Contar con la base de datos descripta en el siguiente archivo:
         ```
         La respuesta incluira en "data" el album agregado en el formato antes mostrado (Que incluye el ID asignado).
 
-    ##### - PUT: /albums/:ID
+    ##### - PUT: /albums/:ID **[TP]**
     - Este endpoint recibe un objeto igual al anterior en el body y modifica el elemento con el ID dado en la base de datos. Devuelve en "data" el album ya modificado.
 
-    ##### - DELETE: /albums/:ID
+    ##### - DELETE: /albums/:ID **[TP]**
     - Este endpoint elimina el album con el ID indicado. De realizarse correctamente, devuelve el mensaje "El album fue borrado con exito." dentro del atributo "data" de la respuesta.
 
 - #### Songs
@@ -115,7 +115,7 @@ Contar con la base de datos descripta en el siguiente archivo:
     - Este Endpoint devuelve dentro de "data" una canción solicitada mediante su ID.
 
 
-    ##### - POST: /songs
+    ##### - POST: /songs **[TP]**
     - Este Endpoint crea una nueva cancion a partir de los siguientes datos introducidos en el body
         ```json
         /*los parametros requeridos son "title" y "album_id" */
@@ -129,12 +129,12 @@ Contar con la base de datos descripta en el siguiente archivo:
 
         Dentro de data se devolverá la cancion creada en el mismo formato.
 
-    ##### - PUT: /songs/:ID
+    ##### - PUT: /songs/:ID **[TP]**
     - Este Endpoint permite modificar una cancion seleccionada mediante su ID e introducidos los parametros en formato JSON desde el body.
         Dentro de "data" se devolvera la cancion con todos sus datos incluídas las modificaciones.
         Aclaración: se deben respetar los campos obligatorios.
    
-    ##### - DELETE: /songs/:ID
+    ##### - DELETE: /songs/:ID **[TP]**
     - Este Endpoint elimina la cancion mediante el ID proporcionado. Dentro de "data" se leerá "la cancion con N° de id = el id proporcionado se eliminó con exito".
 
 
@@ -165,7 +165,7 @@ Contar con la base de datos descripta en el siguiente archivo:
             Autorization: Bearer <Token generado>   
 
 - #### Paramemtros de ordenamiento:
-    Al solicitar una lista de entidades (ver [GET: /albums](#--get-albums) y [GET: /songs](#--get-songs)) podemos usar los siguientes query params para controlar como se muestra la lista incluida en en altributo "data" de la respuesta:
+    Al solicitar una lista de entidades (ver [GET: /albums](#--get-albums) y [GET: /songs](#--get-songs)) podemos usar los siguientes query params para controlar como se muestra la lista incluida en el altributo "data" de la respuesta:
 
     - **?sort_by** : Este parametro recibe un string que debe corresponder con uno de los campos de la entidad solicitada. (De no corresponder se enviara la respuesta ordenada por el campo por defecto).
 
@@ -225,3 +225,4 @@ Contar con la base de datos descripta en el siguiente archivo:
         }
     }
     ```
+    -------------
