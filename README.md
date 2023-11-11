@@ -111,3 +111,7 @@ link de la base de datos
                 "status": "success"
             }
         ```
+    - El token generado mediante este endpoint sera requerido para todos los request de tipo POST, PUT, o DELETE de las entidades de datos. Debera agregarse a los Headers del request en el siguiente 
+    formato
+    
+            Autorization: Bearer <Token generado>   
