@@ -1,0 +1,39 @@
+Songs
+    cada cancion se listará así:
+        {
+            "id": "N° de id",
+            "title": "titulo de la cancion",
+            "rel_date": "fecha de publicacion",
+            "album_id": "N° de id del album al que corresponde la cancion",
+            "lyrics": " letra de la misma"
+        }
+
+    GET: /Songs
+        Este Endpoint devuelve dentro de "data" una lista de la tabla songs guardada en la base de datos.
+        Se puede ordenar por campos y por oden descendente y ascendente. A su vez, la lista se encuentra paginada.
+
+    GET: /songs/:ID
+        Este Endpoint devuelve dentro de "data" una canción solicitada mediante su ID.
+
+    DELETE: /songs/:ID
+        Este Endpoint elimina la cancion mediante el ID proporcionado. Dentro de "data" se leerá "la cancion con N° de id = el id proporcionado se eliminó con exito".
+
+    POST: /songs
+        Este Endpoint crea una nueva cancion a partir de los siguientes datos introducidos en el body
+           /*los parametros requeridos son "title" y "album_id" */
+            {
+                "title": "nombre de la canciuon", 
+                "rel_date": "año-mes-dia de publicacion",
+                "album_id": "N° de id del album al que pertenece", 
+                "lyrics": "letra de la cancion"
+            }
+
+        Dentro de data se devolverá la cancion creada en el mismo formato.
+
+    PUT: /songs/:ID
+        Este Endpoint permite modificar una cancion seleccionada mediante su ID e introducidos los parametros en formato JSON desde el body.
+        Dentro de "data" se devolvera la cancion con todos sus datos incluídas las modificaciones.
+        Aclaración: se deben respetar los campos obligatorios.
+
+
+        
