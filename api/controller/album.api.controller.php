@@ -164,6 +164,11 @@ class AlbumApiController extends TableApiController
             ], 400);
 
         $data = $this->getData();
+        if (empty($data->title) or empty($data->artist) or empty($data->rating))
+        $this->view->response([
+            'response' => "Falto ingresar algun dato",
+            "status" => "error"
+        ], 400);
         $album = $this->model->getAlbumById($id);
 
         if ($album) {

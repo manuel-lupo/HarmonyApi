@@ -40,7 +40,7 @@ class AuthApiController extends TableApiController{
 
         $token = TokenHelper::generate($user);
         $response = [
-            'token'=> $token,
+            'data'=> $token,
             'status' => 'logged'
         ];
         $this->view->response($response,200);

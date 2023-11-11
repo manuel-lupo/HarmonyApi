@@ -6,12 +6,24 @@ require_once('./api/controller/album.api.controller.php');
 require_once ('./api/controller/song.api.controller.php');
 require_once "./api/controller/auth.api.controller.php";
 
+/**
+ * @OA\Info(title="HarmonyHubAPI", version="1")
+ */
+
+
+
 // CONSTANTES PARA RUTEO
 define("BASE_URL", 'http://'.$_SERVER["SERVER_NAME"].':'.$_SERVER["SERVER_PORT"].dirname($_SERVER["PHP_SELF"]).'/');
 
 $router = new Router();
 
 // rutas
+/**
+ * @OA\POST(
+ *     path="/login",
+ *     @OA\Response(response="200", description="Login untilizado para obtener un token que se usara para autenticar al usuario en las operaciones de alta baja y modificacion")
+ * )
+ */
 $router->addRoute("auth", "POST", "AuthApiController", "login");
 
 $router->addRoute("albums" , "GET" , "AlbumApiController", "getAlbums");
