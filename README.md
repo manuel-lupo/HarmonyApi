@@ -1,6 +1,6 @@
 # **Harmony Hub API**
 
-### - Descripcion
+### - Descripción
 Esta API tiene como propósito acceder a los datos **(canciones y albums)** presentes en la base de datos. Todas las respuestas de la **API** tienen el siguiente formato:
 ```json
 {
@@ -52,7 +52,7 @@ Contar con la base de datos descripta en los siguientes archivos:
             "review": "Review",
             "artist": "Artista",
             "genre": "Genero",
-            "rating": 4.3 //Numero de tipo float
+            "rating": 4.3 //Número de tipo float
         }
     ```
     #####  - GET: /albums
@@ -72,7 +72,7 @@ Contar con la base de datos descripta en los siguientes archivos:
 
         ```json
         /*
-        Los unicos campos necesarios para añadir o
+        Los únicos campos necesarios para añadir o
         modificar un album son "title", "artist" y "rating"
         */
         {
@@ -82,7 +82,7 @@ Contar con la base de datos descripta en los siguientes archivos:
             "review": "Review",
             "artist": "Artista",
             "genre": "Genero",
-            "rating": 4.3 //Numero de tipo float
+            "rating": 4.3 //Número de tipo float
         }
         ```
         La respuesta incluirá en **"data"** el album agregado en el formato antes mostrado (Que incluye el **ID** asignado).
@@ -95,7 +95,7 @@ Contar con la base de datos descripta en los siguientes archivos:
 
 - #### Songs
 
-    *Cada cancion se listará de la siguiente manera:*
+    *Cada canción se listará de la siguiente manera:*
         
     ```json
         {
@@ -140,7 +140,7 @@ Contar con la base de datos descripta en los siguientes archivos:
 
         
 
-- #### Autorizacion
+- #### Autorización
     #####  - POST: /auth 
     -  Este Endpoint recibe en el body del **HTTP Request** un objeto de tipo **JSON** con las propiedades **"name"** y **"password'**. De ser correctos los datos introducidos, se proporcionará dentro de **"data"** un token que permite identificarse.
     
