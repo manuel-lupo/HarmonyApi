@@ -1,7 +1,7 @@
 # **Harmony Hub API**
 
 ### - Descripcion
-Esta API tiene como proposito acceder a los datos **(canciones y albums)** presentes en la base de datos. Todas las respuestas de la **API** tienen el siguiente formato:
+Esta API tiene como propósito acceder a los datos **(canciones y albums)** presentes en la base de datos. Todas las respuestas de la **API** tienen el siguiente formato:
 ```json
 {
 	"data": "Respuesta del endpoint",
@@ -10,9 +10,9 @@ Esta API tiene como proposito acceder a los datos **(canciones y albums)** prese
 ```
 *Aclaraciones:* 
 
-- Los unicos valores posibles de **"status"** son **"success"** y **"error"**.
+- Los únicos valores posibles de **"status"** son **"success"** y **"error"**.
 
-- Ante cualquier error encontrado, todos las respuestas tendran el siguiente formato:
+- Ante cualquier error encontrado, todas las respuestas tendrán el siguiente formato:
     ```json
     {
         "data": "Mensaje del error",
@@ -20,7 +20,7 @@ Esta API tiene como proposito acceder a los datos **(canciones y albums)** prese
     }
     ``` 
 
-- La direccion base de la API es la siguiente:
+- La dirección base de la API es la siguiente:
 
     - **{ruta_serividor_apache}/api**
 
@@ -37,11 +37,11 @@ Contar con la base de datos descripta en los siguientes archivos:
 ------------
 
 ### - Endpoints
- - Aclaracion: Los endpoints marcados con **[TP]** (Token protected) estan protegidos por **un token de autorizacion *(ver [POST: /auth](#--post-auth))***.
+ - Aclaracion: Los endpoints marcados con **[TP]** (Token protected) están protegidos por **un token de autorización *(ver [POST: /auth](#--post-auth))***.
     
 - #### Albums
 
-    *Cada album se listara de la siguiente manera:*
+    *Cada album se listará de la siguiente manera:*
             
     ```json
         {
@@ -56,13 +56,13 @@ Contar con la base de datos descripta en los siguientes archivos:
         }
     ```
     #####  - GET: /albums
-    - Este Endpoint devuelve la lista de albums de la base de datos dentro de **"data"**. Puede recibir distintas opciones para **filtrar** la lista a traves de query params:
+    - Este Endpoint devuelve la lista de albums de la base de datos dentro de **"data"**. Puede recibir distintas opciones para **filtrar** la lista a través de query params:
     
         - **?search_input** :
-        Este paramentro recibe un **string** y devuelve una lista con todos los albums que lo **contengan dentro del titulo**.
+        Este parámentro recibe un **string** y devuelve una lista con todos los albums que lo **contengan dentro del título**.
 
         - **?min_rating** :
-        Este parametro recibe un numero de tipo **float** y devuelve una lista con todos los albums que tengan un **rating mayor al indicado**.
+        Este parámetro recibe un número de tipo **float** y devuelve una lista con todos los albums que tengan un **rating mayor al indicado**.
 
     ##### - GET: /albums/:ID
     - Este Endpoint devuelve el album con el ID indicado dentro de **"data"**.
@@ -85,7 +85,7 @@ Contar con la base de datos descripta en los siguientes archivos:
             "rating": 4.3 //Numero de tipo float
         }
         ```
-        La respuesta incluira en **"data"** el album agregado en el formato antes mostrado (Que incluye el **ID** asignado).
+        La respuesta incluirá en **"data"** el album agregado en el formato antes mostrado (Que incluye el **ID** asignado).
 
     ##### - PUT: /albums/:ID **[TP]**
     - Este endpoint recibe un objeto igual al anterior en el body y modifica el elemento con el **ID** dado en la base de datos. Devuelve en **"data"** el album ya modificado.
@@ -115,7 +115,7 @@ Contar con la base de datos descripta en los siguientes archivos:
 
 
     ##### - POST: /songs **[TP]**
-    - Este Endpoint crea una nueva cancion a partir de los siguientes datos introducidos en el body
+    - Este Endpoint crea una nueva canción a partir de los siguientes datos introducidos en el body:
         ```json
         /*los parametros requeridos son "title" y "album_id" */
          {
@@ -126,23 +126,23 @@ Contar con la base de datos descripta en los siguientes archivos:
          }
          ```
 
-        Dentro de **"data"** se devolverá la cancion creada en el mismo formato.
+        Dentro de **"data"** se devolverá la canción creada en el mismo formato.
 
     ##### - PUT: /songs/:ID **[TP]**
-    - Este Endpoint permite modificar una cancion seleccionada mediante su **ID**, introduciendo los parametros en formato JSON desde el body.
-        Dentro de **"data"** se devolvera la cancion con todos sus datos incluídas las modificaciones.
+    - Este Endpoint permite modificar una canción seleccionada mediante su **ID**, introduciendo los parámetros en formato JSON desde el body.
+        Dentro de **"data"** se devolvera la canción con todos sus datos incluídas las modificaciones.
         
     - ***Aclaración**: se deben respetar los **campos obligatorios***.
    
     ##### - DELETE: /songs/:ID **[TP]**
-    - Este Endpoint elimina la cancion mediante el **ID** proporcionado. Dentro de **"data"** se leerá **"la cancion con N° de id = el id proporcionado se eliminó con exito"**.
+    - Este Endpoint elimina la canción mediante el **ID** proporcionado. Dentro de **"data"** se leerá **"la cancion con N° de id = el id proporcionado se eliminó con exito"**.
 
 
         
 
 - #### Autorizacion
     #####  - POST: /auth 
-    -  Este Endpoint recibe en el body del **HTTP Request** un objeto de tipo **JSON** con las propiedades **"name"** y **"password'**. De ser correctos los datos introducidos, se proporcionara dentro de **"data"** un token que permite identificarse.
+    -  Este Endpoint recibe en el body del **HTTP Request** un objeto de tipo **JSON** con las propiedades **"name"** y **"password'**. De ser correctos los datos introducidos, se proporcionará dentro de **"data"** un token que permite identificarse.
     
    - *Ejemplo*:
     
@@ -159,25 +159,25 @@ Contar con la base de datos descripta en los siguientes archivos:
                 "status": "success"
             }
         ```
-    - El **token** generado mediante este endpoint sera requerido para todos los request de tipo **POST, PUT, o DELETE** de las entidades de datos. Debera agregarse a los **Headers** del request en el siguiente formato
+    - El **token** generado mediante este endpoint será requerido para todos los request de tipo **POST, PUT, o DELETE** de las entidades de datos. Deberá agregarse a los **Headers** del request en el siguiente formato:
     
             Autorization: Bearer <Token generado>   
 
-- #### Paramemtros de ordenamiento:
-    Al solicitar una lista de entidades ***(ver [GET: /albums](#--get-albums) y [GET: /songs](#--get-songs))*** podemos usar los siguientes query params para controlar como se muestra la lista incluida en el altributo **"data"** de la respuesta:
+- #### Parámemtros de ordenamiento:
+    Al solicitar una lista de entidades ***(ver [GET: /albums](#--get-albums) y [GET: /songs](#--get-songs))*** podemos usar los siguientes query params para controlar cómo se muestra la lista incluída en el altributo **"data"** de la respuesta:
 
-    - **?sort_by** : Este parametro recibe un string que **debe corresponder** con uno de los **campos de la entidad solicitada**. (De no corresponder se enviara la respuesta ordenada por el campo por defecto).
+    - **?sort_by** : Este parámetro recibe un string que **debe corresponder** con uno de los **campos de la entidad solicitada**. (De no corresponder se enviará la respuesta ordenada por el campo por defecto).
 
-    - **?order** : Este parametro recibe un numero entero que puede ser 1 o 0. Si es **1** se ordenara la lista de manera **descendiente**. De ser **0 o cualquier otro numero** se ordenara **ascendentemente**.
+    - **?order** : Este parámetro recibe un número entero que puede ser 1 o 0. Si es **1** se ordenará la lista de manera **descendiente**. De ser **0 o cualquier otro número** se ordenara **ascendentemente**.
 
-- #### Parametros de paginado:
+- #### Parámetros de paginado:
     Al solicitar una **lista de entidades**, podemos usar los siguientes query params para paginar la respuesta
 
-    - **?per_page** : Recibe un **numero entero** que define la cantidad de elementos que contendra cada pagina. **El valor por defecto es de 10**.
+    - **?per_page** : Recibe un **número entero** que define la cantidad de elementos que contendrá cada página. **El valor por defecto es de 10**.
 
-    - **?page** : Indica la pagina que se quiere recuperar.
+    - **?page** : Indica la página que se quiere recuperar.
 
-    *Un ejemplo de respuestas por pagina pudiera ser:*
+    *Un ejemplo de respuestas por página pudiera ser:*
 
     ```json
     /*
