@@ -102,7 +102,7 @@ Contar con la base de datos descripta en los siguientes archivos:
             "id": "N° de id",
             "title": "titulo de la cancion",
             "rel_date": "fecha de publicacion",
-            "album_id": "N° de id del album al que corresponde la  cancion",
+            "album_id": "N° de id del album al que corresponde la  canción",
             "lyrics": " letra de la misma"
         }
     ```
@@ -119,10 +119,10 @@ Contar con la base de datos descripta en los siguientes archivos:
         ```json
         /*los parametros requeridos son "title" y "album_id" */
          {
-             "title": "nombre de la canciuon", 
-             "rel_date": "año-mes-dia de publicacion",
+             "title": "nombre de la canción", 
+             "rel_date": "año-mes-dia de publicación",
              "album_id": "N° de id del album al que pertenece", 
-             "lyrics": "letra de la cancion"
+             "lyrics": "letra de la canción"
          }
          ```
 
