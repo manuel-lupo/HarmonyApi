@@ -1,8 +1,7 @@
 # **Harmony Hub API**
 
 ### - Descripcion
-Esta API tiene como proposito acceder a los datos (canciones y albums) presentes en la BBDD. A su vez, si se cuenta con un token valido, se podra acceder a la Alta-Baja-Modificacion de los items.
-Todas las respuestas de la API tienen el siguiente formato:
+Esta API tiene como proposito acceder a los datos (canciones y albums) presentes en la BBDD. Todas las respuestas de la API tienen el siguiente formato:
 ```json
 {
 	"data": "respuesta del endpoint",
@@ -35,7 +34,12 @@ link de la base de datos
 ------------
 
 ### - Endpoints
-- #### Paramemtros 
+- #### Paramemtros de ordenamiento:
+    Al solicitar una lista de entidades (ver GET: /albums y GET: /songs) podemos usar los siguientes query params para controlar como se muestra la lista incluida en en altributo "data" de la respuesta:
+
+    - **?sort_by** : Este parametro recibe un string que debe corresponder con uno de los campos de la entidad solicitada. (De no corresponder se enviara la respuesta ordenada por el campo por defecto).
+
+    - **?order** : Este parametro recibe un numero entero que puede ser 1 o 0. Si es 1 se ordenara la lista de manera descendiente. De ser 0 o cualquier otro numero se ordenara ascendentemente.
     
 - #### Albums
 
@@ -87,6 +91,7 @@ link de la base de datos
 
     ##### - PUT: /albums/:ID
     - Este endpoint recibe un objeto igual al anterior en el body y modifica el elemento con el ID dado en la base de datos.
+
 - #### Autorizacion
     #####  - POST: /auth 
     -  Este Endpoint recibe en el body del request un objeto de tipo JSON con las propiedades "name" y "password'. De ser correctos los datos introducidos, se proporcionara dentro de "data" un token que permite identificarse.
