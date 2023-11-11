@@ -49,17 +49,25 @@ class AlbumApiController extends TableApiController
                     'data' => $albums,
                     'status' => 'success'
                 ], 200);
-            else
+            
+            //Si el arreglo esta vacio y se indico un input de busqueda no se encontro un album que coincida con el mismo
+            if($input !== "")
                 $this->view->response([
                     'data'=> "No se encontraron resultados con la búsqueda de: {$input}",
                     "status"=> "error"
                 ], 404);
-        } else {
+
+            //Si llega hasta este ultimo response por alguna razon la base de datos no contiene albums
             $this->view->response([
-                "data"=> "Ha ocurrido un error y no se puede completar la busqueda",
+                'data'=> "No hay albums en nuestra base de datos",
                 "status"=> "error"
-            ], 500);
+            ], 500);  
         }
+
+        $this->view->response([
+            "data"=> "Ha ocurrido un error y no se puede completar la busqueda",
+            "status"=> "error"
+        ], 500);
     }
 
 
