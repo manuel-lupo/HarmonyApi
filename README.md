@@ -1,11 +1,11 @@
 # **Harmony Hub API**
 
 ### - Descripcion
-Esta API tiene como proposito acceder a los datos (canciones y albums) presentes en la BBDD. Todas las respuestas de la API tienen el siguiente formato:
+Esta API tiene como proposito acceder a los datos (canciones y albums) presentes en la base de datos. Todas las respuestas de la API tienen el siguiente formato:
 ```json
 {
-	"data": "respuesta del endpoint",
-	"status": "Estados de la respuesta"
+	"data": "Respuesta del endpoint",
+	"status": "Estado de la respuesta"
 }
 ```
 Aclaraciones: 
@@ -20,26 +20,85 @@ Aclaraciones:
     }
     ``` 
 
-La direccion base de la API es la siguiente:
+- La direccion base de la API es la siguiente:
 
-- **{ruta_serividor_apache}/api**
+    - **{ruta_serividor_apache}/api**
+
+        - En adelante nos referiremos a la ruta del servidor como BASE_URL.
 
 ------------
 
 
 ### - Requerimientos
-Contar con la BBDD descripta en el siguiente archivo:
-link de la base de datos
+Contar con la base de datos descripta en el siguiente archivo:
+- [Ver archivo SQL]()
+- [Ver diagrame DER]()
+
 
 ------------
 
 ### - Endpoints
 - #### Paramemtros de ordenamiento:
-    Al solicitar una lista de entidades (ver GET: /albums y GET: /songs) podemos usar los siguientes query params para controlar como se muestra la lista incluida en en altributo "data" de la respuesta:
+    Al solicitar una lista de entidades (ver [GET: /albums](#get-albums) y [GET: /songs]()) podemos usar los siguientes query params para controlar como se muestra la lista incluida en en altributo "data" de la respuesta:
 
     - **?sort_by** : Este parametro recibe un string que debe corresponder con uno de los campos de la entidad solicitada. (De no corresponder se enviara la respuesta ordenada por el campo por defecto).
 
     - **?order** : Este parametro recibe un numero entero que puede ser 1 o 0. Si es 1 se ordenara la lista de manera descendiente. De ser 0 o cualquier otro numero se ordenara ascendentemente.
+
+- #### Parametros de paginado:
+    Al solicitar una lista de entidades, podemos usar los siguientes query params para paginar la respuesta
+
+    - **?per_page** : Recibe un numero entero que define la cantidad de elementos que contendra cada pagina. El valor por defecto es de 10.
+
+    - **?page** : Indica la pagina que se quiere recuperar.
+
+    Un ejemplo de respuestas por pagina pudiera ser:
+
+    ```json
+    /*
+    Respuesta de request con verbo GET a: 
+        BASE_URL/api/albums?per_page=3page=1sort_by=title
+    */
+    {
+        {
+            "id": 43,
+            "title": "Album 1",
+            [...]
+        },
+        {
+            "id": 4,
+            "title": "Album 2",
+            [...]
+        },
+        {
+            "id": 34,
+            "title": "Album 3",
+            [...]
+        }
+    }
+    
+    /*
+    Respuesta de request con verbo GET a: 
+        BASE_URL/api/albums?per_page=3page=2sort_by=title
+    */
+    {
+        {
+            "id": 3,
+            "title": "Album 4",
+            [...]
+        },
+        {
+            "id": 434,
+            "title": "Album 5",
+            [...]
+        },
+        {
+            "id": 343,
+            "title": "Album 6",
+            [...]
+        }
+    }
+    ```
     
 - #### Albums
 
@@ -75,7 +134,7 @@ link de la base de datos
         ```json
         /*
         Los unicos campos necesarios para añadir o
-        modificar un album son "title", "artist", "rating"
+        modificar un album son "title", "artist" y "rating"
         */
         {
             "title": "Album",
